@@ -6,9 +6,9 @@ module "deploy" {
   internal_port = var.ports
   volume_nfs = [
     {
-    path_on_nfs = "/"
-    nfs_endpoint = "10.10.0.100"
-    volume_name = var.volume-data
+      path_on_nfs = "/"
+      nfs_endpoint = "10.10.0.100"
+      volume_name = var.volume-data
     }
   ]
   volume_host_path = [
