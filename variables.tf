@@ -12,7 +12,7 @@ variable "image" {
   description = "(Required) Docker image for app"
 }
 variable "volume_nfs" {
-  type        = list(object({path_on_nfs = string, nfs_endpoint = string, volume_name = string}))
+  type        = list(object({ path_on_nfs = string, nfs_endpoint = string, volume_name = string }))
   description = "(Optional) Attach NFS"
   default     = []
 }
@@ -21,7 +21,7 @@ variable "volume_host_path" {
   default     = []
 }
 variable "volume_config_map" {
-  type        = list(object({mode = string, name = string, volume_name = string}))
+  type        = list(object({ mode = string, name = string, volume_name = string }))
   description = "(Optional) The data stored in a ConfigMap object can be referenced in a volume of type configMap and then consumed by containerized applications running in a Pod"
   default     = []
 }
@@ -38,17 +38,17 @@ variable "volume_mount" {
   default     = []
 }
 variable "env" {
-  type        = list(object({name = string, value = string}))
+  type        = list(object({ name = string, value = string }))
   description = "(Optional) Add environment variables to pods."
   default     = []
 }
 variable "env_field" {
-  type        = list(object({name = string, field_path = string}))
+  type        = list(object({ name = string, field_path = string }))
   description = "(Optional) Get field from k8s and add as environment variables to pods"
   default     = []
 }
 variable "hosts" {
-  type        = list(object({hostname = string, ip = string}))
+  type        = list(object({ hostname = string, ip = string }))
   description = "(Optional) Add /etc/hosts records to pods"
   default     = []
 }
@@ -77,8 +77,8 @@ variable "command" {
 }
 
 variable "tty" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 variable "service_account_token" {
   type        = bool
@@ -136,13 +136,36 @@ variable "security_context_capabilities" {
 }
 variable "env_secret" {
   description = "(Optional) Get secret keys from k8s and add as environment variables to pods"
-  type        = list(object({name = string, secret_name = string, secret_key = string}))
+  type        = list(object({ name = string, secret_name = string, secret_key = string }))
   default     = []
 }
 variable "strategy_update" {
   description = "(Optional) Type of deployment. Can be 'Recreate' or 'RollingUpdate'"
-  default = "RollingUpdate"
+  default     = "RollingUpdate"
 }
 variable "wait_for_rollout" {
   default = true
+}
+
+variable "init_containers" {
+  type    = list(object({ command = list(string), image = string }))
+  default = []
+}
+
+variable "init_env_secret" {
+  description = "(Optional) Get secret keys from k8s and add as environment variables to pods"
+  type        = list(object({ name = string, secret_name = string, secret_key = string }))
+  default     = []
+}
+
+variable "init_env_field" {
+  type        = list(object({ name = string, field_path = string }))
+  description = "(Optional) Get field from k8s and add as environment variables to pods"
+  default     = []
+}
+
+variable "init_env" {
+  type        = list(object({ name = string, value = string }))
+  description = "(Optional) Add environment variables to pods."
+  default     = []
 }
