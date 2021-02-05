@@ -48,4 +48,11 @@ module "deploy" {
       volume_name = var.volume-config
     }
   ]
+  init_containers = [
+    {
+      image="busybox:1.28"
+      command: ["until"]
+    }
+  ]
+
 }
