@@ -169,3 +169,9 @@ variable "init_env" {
   description = "(Optional) Add environment variables to pods."
   default     = []
 }
+
+variable "init_sysctl" {
+  type        = list(object({ name = string, value = string }))
+  description = "(Optional) Add environment variables to pods."
+  default     = []
+}

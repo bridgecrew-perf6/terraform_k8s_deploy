@@ -34,6 +34,13 @@ resource "kubernetes_deployment" "deploy_app" {
             run_as_user     = lookup(security_context.value, "user_id", null)
             run_as_non_root = lookup(security_context.value, "as_non_root", null)
 
+            dynamic "sysctl"{
+              for_each = var.init_sysctl
+              content {
+                name  = sysctl.value.name
+                value = sysctl.value.value
+              }
+            }
           }
         }
 
