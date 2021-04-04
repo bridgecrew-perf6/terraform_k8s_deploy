@@ -54,5 +54,11 @@ module "deploy" {
       command: ["until"]
     }
   ]
+  init_sysctl = [
+    {
+      name = "net.core.somaxconn"
+      value = "1024"
+    }
+  ]
 
 }

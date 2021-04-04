@@ -37,6 +37,7 @@ variable "volume_mount" {
   description = "(Optional) Mount path from pods to volume"
   default     = []
 }
+
 variable "env" {
   type        = list(object({ name = string, value = string }))
   description = "(Optional) Add environment variables to pods."
@@ -173,5 +174,10 @@ variable "init_env" {
 variable "init_sysctl" {
   type        = list(object({ name = string, value = string }))
   description = "(Optional) Add environment variables to pods."
+  default     = []
+}
+
+variable "init_volume_mount" {
+  description = "(Optional) Mount path from pods to volume for init containeer"
   default     = []
 }
