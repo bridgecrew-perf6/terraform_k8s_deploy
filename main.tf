@@ -370,6 +370,17 @@ resource "kubernetes_deployment" "deploy_app" {
         }
 
         dynamic "volume" {
+          for_each         = var.volume_secret
+          content {
+            secret {
+              default_mode = volume.value.mode
+              secret_name  = volume.value.name
+            }
+            name           = volume.value.volume_name
+          }
+        }
+
+        dynamic "volume" {
           for_each = var.volume_gce_disk
           content {
             gce_persistent_disk {
